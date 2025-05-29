@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Data Tracker</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 15px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c5d3c; /* Golf green */
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 5px; /* Add some space below inputs */
+        }
+        /* Specific styling for number inputs if needed to make them less wide */
+        .input-group label {
+            display: inline-block; /* Align label and input better for numbers */
+            width: auto; /* Adjust as needed */
+            margin-right: 10px;
+        }
+         .input-group {
+            display: flex;
+            flex-direction: column; /* Stack label above input */
+            margin-bottom: 10px; /* Space between numeric input groups */
+        }
+        .input-group input[type="number"] {
+            width: 80px; /* Make number inputs less wide */
+            padding: 8px;
+        }
+
+        fieldset {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px 15px;
+            margin-top: 20px;
+        }
+        legend {
+            font-weight: bold;
+            color: #333;
+            padding: 0 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #38a169;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #2f855a;
+        }
+        #message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .success {
+            background-color: #e6fffa;
+            color: #2f855a;
+            border: 1px solid #b7e4d8;
+        }
+        .error {
+            background-color: #fed7d7;
+            color: #c53030;
+            border: 1px solid #fbb6b6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Golf Round Data</h1>
+        <form id="golfForm">
+            <fieldset>
+                <legend>Round Details</legend>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="course">Course:</label>
+                <input type="text" id="course" name="course" required>
+            </fieldset>
+
+            <fieldset>
+                <legend>Driver Issues (Count)</legend>
+                <div class="input-group"><label for="driverToe">Toe:</label><input type="number" id="driverToe" name="driverToe" min="0" value="0"></div>
+                <div class="input-group"><label for="driverHeel">Heel:</label><input type="number" id="driverHeel" name="driverHeel" min="0" value="0"></div>
+                <div class="input-group"><label for="driverLeft">Left:</label><input type="number" id="driverLeft" name="driverLeft" min="0" value="0"></div>
+                <div class="input-group"><label for="driverRight">Right:</label><input type="number" id="driverRight" name="driverRight" min="0" value="0"></div>
+                <div class="input-group"><label for="driverHigh">High:</label><input type="number" id="driverHigh" name="driverHigh" min="0" value="0"></div>
+                <div class="input-group"><label for="driverLow">Low:</label><input type="number" id="driverLow" name="driverLow" min="0" value="0"></div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Approach Issues (Count)</legend>
+                <div class="input-group"><label for="approachToe">Toe:</label><input type="number" id="approachToe" name="approachToe" min="0" value="0"></div>
+                <div class="input-group"><label for="approachHeel">Heel:</label><input type="number" id="approachHeel" name="approachHeel" min="0" value="0"></div>
+                <div class="input-group"><label for="approachLeft">Left:</label><input type="number" id="approachLeft" name="approachLeft" min="0" value="0"></div>
+                <div class="input-group"><label for="approachRight">Right:</label><input type="number" id="approachRight" name="approachRight" min="0" value="0"></div>
+                <div class="input-group"><label for="approachHigh">High:</label><input type="number" id="approachHigh" name="approachHigh" min="0" value="0"></div>
+                <div class="input-group"><label for="approachLow">Low:</label><input type="number" id="approachLow" name="approachLow" min="0" value="0"></div>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Mental Game Factors (Count)</legend>
+                <div class="input-group"><label for="mentalAggressive">Too aggressive strategy:</label><input type="number" id="mentalAggressive" name="mentalAggressive" min="0" value="0"></div>
+                <div class="input-group"><label for="mentalMiscalculation">Miscalculation:</label><input type="number" id="mentalMiscalculation" name="mentalMiscalculation" min="0" value="0"></div>
+                <div class="input-group"><label for="mentalFear">Fear:</label><input type="number" id="mentalFear" name="mentalFear" min="0" value="0"></div>
+                <div class="input-group"><label for="mentalClubSelection">Club Selection:</label><input type="number" id="mentalClubSelection" name="mentalClubSelection" min="0" value="0"></div>
+                <div class="input-group"><label for="mentalDistracted">Distracted:</label><input type="number" id="mentalDistracted" name="mentalDistracted" min="0" value="0"></div>
+                <div class="input-group"><label for="mentalCueFocus">Loss of cue-focus:</label><input type="number" id="mentalCueFocus" name="mentalCueFocus" min="0" value="0"></div>
+                <div class="input-group"><label for="mentalMisjudgeConditions">Mis-judge conditions:</label><input type="number" id="mentalMisjudgeConditions" name="mentalMisjudgeConditions" min="0" value="0"></div>
+                <div class="input-group"><label for="mentalNoCommitment">No commitment to decision:</label><input type="number" id="mentalNoCommitment" name="mentalNoCommitment" min="0" value="0"></div>
+            </fieldset>
+
+            <button type="submit">Submit Data</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        // !!! IMPORTANT: PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE !!!
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw9q2is3snZWmRkibXeOHpusR37Xr935gK4RA5HBAstxk_2xiVe0Jb-iG3cZwuTQPN_/exec'; 
+
+        const form = document.getElementById('golfForm');
+        const messageDiv = document.getElementById('message');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            messageDiv.textContent = '';
+            messageDiv.className = '';
+
+            const formData = new FormData(form);
+            const data = {
+                date: formData.get('date'),
+                course: formData.get('course'),
+                // Parse all counts as integers, default to 0 if blank or invalid
+                driverToe: parseInt(formData.get('driverToe')) || 0,
+                driverHeel: parseInt(formData.get('driverHeel')) || 0,
+                driverLeft: parseInt(formData.get('driverLeft')) || 0,
+                driverRight: parseInt(formData.get('driverRight')) || 0,
+                driverHigh: parseInt(formData.get('driverHigh')) || 0,
+                driverLow: parseInt(formData.get('driverLow')) || 0,
+                approachToe: parseInt(formData.get('approachToe')) || 0,
+                approachHeel: parseInt(formData.get('approachHeel')) || 0,
+                approachLeft: parseInt(formData.get('approachLeft')) || 0,
+                approachRight: parseInt(formData.get('approachRight')) || 0,
+                approachHigh: parseInt(formData.get('approachHigh')) || 0,
+                approachLow: parseInt(formData.get('approachLow')) || 0,
+                mentalAggressive: parseInt(formData.get('mentalAggressive')) || 0,
+                mentalMiscalculation: parseInt(formData.get('mentalMiscalculation')) || 0,
+                mentalFear: parseInt(formData.get('mentalFear')) || 0,
+                mentalClubSelection: parseInt(formData.get('mentalClubSelection')) || 0,
+                mentalDistracted: parseInt(formData.get('mentalDistracted')) || 0,
+                mentalCueFocus: parseInt(formData.get('mentalCueFocus')) || 0,
+                mentalMisjudgeConditions: parseInt(formData.get('mentalMisjudgeConditions')) || 0,
+                mentalNoCommitment: parseInt(formData.get('mentalNoCommitment')) || 0
+            };
+
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                headers: {
+                    // 'Content-Type': 'application/json', // Not strictly necessary as default for text/plain often works, but good practice. Apps Script expects stringified content.
+                },
+                body: JSON.stringify(data), // Apps Script e.postData.contents will be this string
+                redirect: 'follow' 
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.result === "success") {
+                    messageDiv.textContent = 'Data submitted successfully!';
+                    messageDiv.className = 'success';
+                    form.reset(); // Clear the form
+                     // Manually reset number fields to 0 as form.reset() might not for all browsers with value attribute
+                    form.querySelectorAll('input[type="number"]').forEach(input => input.value = '0');
+                } else {
+                    messageDiv.textContent = 'Error: ' + (result.error || 'Unknown error');
+                    messageDiv.className = 'error';
+                    console.error('Submission error:', result);
+                }
+            })
+            .catch(error => {
+                messageDiv.textContent = 'Submission failed: ' + error;
+                messageDiv.className = 'error';
+                console.error('Fetch error:', error);
+            })
+            .finally(() => {
+                 submitButton.disabled = false;
+                 submitButton.textContent = 'Submit Data';
+            });
+        });
+    </script>
+</body>
+</html>
